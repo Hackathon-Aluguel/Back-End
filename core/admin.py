@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from core.models.item import Item, Categoria
+
+
+admin.site.register(Item)
+admin.site.register(Categoria)
+

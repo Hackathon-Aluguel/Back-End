@@ -4,9 +4,12 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from django.views.generic import RedirectView
 
+from core.views import ItemViewSet, CategoriaViewSet
 
 
 router = DefaultRouter()
+router.register(r"itens", ItemViewSet)
+router.register(r"Categorias", CategoriaViewSet)
 
 urlpatterns = [
     
