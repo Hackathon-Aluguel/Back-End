@@ -5,8 +5,8 @@ from core.models import User
 class avaliacao_User (models.Model):
     descricao = models.CharField(max_length=45)
     estrelas = models.DecimalField(max_digits=1, decimal_places=1)
-    avaliado = models.ForeignKey(User, on_delete=models.PROTECT)
-    avaliador = models.ForeignKey(User, on_delete=models.PROTECT)
+    avaliado = models.ForeignKey(User, on_delete=models.PROTECT, related_name="avaliado")
+    avaliador = models.ForeignKey(User, on_delete=models.PROTECT, related_name="avaliador")
 
     def __str__(self):
         return f'User avaliado: {self.avaliado}, Avaliador: {self.avaliador}'

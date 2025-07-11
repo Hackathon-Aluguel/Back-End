@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from core.models import avaliacao_Item, avaliacao_User
-from core.serializers import avaliacao_ItemSerializer, avaliacao_UserSerializer
+from core.models.avaliacao import avaliacao_Item, avaliacao_User
+from core.serializers.avaliacao import avaliacao_ItemSerializer, avaliacao_UserSerializer
 
 class avaliacao_ItemViewSet(ModelViewSet):
     queryset = avaliacao_Item.objects.all()
