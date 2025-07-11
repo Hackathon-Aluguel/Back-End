@@ -1,10 +1,13 @@
 from django.contrib import admin
 
 from core.models.avaliacao import avaliacao_Item, avaliacao_User
-
+from core.models.item import Item, Categoria
 
 admin.site.register(avaliacao_Item)
 admin.site.register(avaliacao_User)
+admin.site.register(Item)
+admin.site.register(Categoria)
+
 
 
 """
