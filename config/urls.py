@@ -7,6 +7,7 @@ from django.views.generic import RedirectView
 from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet
 from core.views.item import ItemViewSet, CategoriaViewSet
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
+from core.views.midia import MidiaViewSet, Midia_itensViewSet
 
 
 router = DefaultRouter()
@@ -16,6 +17,8 @@ router.register(r"itens", ItemViewSet)
 router.register(r"Categorias", CategoriaViewSet)
 router.register(r"Aluguel", AluguelViewSet)
 router.register(r"Itens do aluguel", Item_aluguelViewSet)
+router.register(r"Midia", MidiaViewSet)
+router.register(r"Midia Itens", Midia_itensViewSet)
 
 urlpatterns = [
     

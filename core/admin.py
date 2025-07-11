@@ -2,11 +2,17 @@ from django.contrib import admin
 
 from core.models.avaliacao import avaliacao_Item, avaliacao_User
 from core.models.item import Item, Categoria
+from core.models.aluguel import Aluguel, Item_aluguel
+from core.models.midia import Midia, Midia_itens
 
 admin.site.register(avaliacao_Item)
 admin.site.register(avaliacao_User)
 admin.site.register(Item)
 admin.site.register(Categoria)
+admin.site.register(Aluguel)
+admin.site.register(Item_aluguel)
+admin.site.register(Midia)
+admin.site.register(Midia_itens)
 
 
 
