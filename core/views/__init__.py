@@ -1,0 +1,1 @@
+from .aluguel import Aluguel, Item_aluguel
