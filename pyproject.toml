@@ -6,6 +6,7 @@ authors = [
     {name = "mateusLimadeMacedo", email = "mateuslimamacedo2008@gmail.com"},
     {name = "renan1811", email = "erickechaves@gmail.com"},
     {name = "", email = ""},
+    {name = "erickChavesFiamoncini", email = "erickechaves@gmail.com"},
 ]
 dependencies = [
     "django>=5.2.4",
@@ -13,8 +14,10 @@ dependencies = [
     "python-dotenv>=1.1.1",
     "netifaces>=0.11.0",
     "django-filter>=25.1",
+    "Pillow>=11.3.0",
+    "python-magic>=0.4.27; sys_platform == \"linux\"",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 readme = "README.md"
 license = {text = "MIT"}
 
@@ -26,4 +29,4 @@ distribution = false
 dev = "python manage.py runserver"
 makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
-
+user = "python manage.py createsuperuser"

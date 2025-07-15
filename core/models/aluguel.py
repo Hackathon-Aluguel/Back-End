@@ -18,3 +18,7 @@ class Item_aluguel(models.Model):
 
     def _str_ (self):
         return f'{self.item}'
+
+    class Meta:
+        verbose_name = 'Item_aluguel'
+        verbose_name_plural = 'Itens_aluguel'
