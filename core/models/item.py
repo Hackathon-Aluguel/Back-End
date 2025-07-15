@@ -1,5 +1,5 @@
 from django.db import models
-
+from core.models.user import User
 class Categoria (models.Model):
     descricao = models.CharField(max_length=45)
 
@@ -11,7 +11,8 @@ class Item (models.Model):
     descricao = models.CharField(max_length=45)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     tempo_limite = models.DateField()
-    categoria = models.ForeignKey (Categoria, on_delete=models.PROTECT)
+    categoria = models.ForeignKey (Categoria, on_delete=models.PROTECT, blank=True, null=True)
+    usuario = models.ForeignKey (User, on_delete=models.PROTECT, blank=True, null= True)
 
     def __str__(self):
         return f'Item: {self.nome}'
