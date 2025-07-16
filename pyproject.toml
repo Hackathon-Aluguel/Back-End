@@ -5,7 +5,6 @@ description = "Default template for PDM package"
 authors = [
     {name = "mateusLimadeMacedo", email = "mateuslimamacedo2008@gmail.com"},
     {name = "renan1811", email = "erickechaves@gmail.com"},
-    {name = "", email = ""},
     {name = "erickChavesFiamoncini", email = "erickechaves@gmail.com"},
 ]
 dependencies = [
