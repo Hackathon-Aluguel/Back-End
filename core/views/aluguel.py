@@ -22,7 +22,6 @@ class AluguelViewSet(ModelViewSet):
 class Item_aluguelViewSet(ModelViewSet):
     queryset = Item_aluguel.objects.all()
     serializer_class = Item_aluguelSerializer
-    #permission_classes = [IsAuthenticated & (IsAdmin | IsPadrao)]
 
     def get_queryset(self):
         user = self.request.user
