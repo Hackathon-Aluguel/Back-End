@@ -29,5 +29,5 @@ class Item_aluguelViewSet(ModelViewSet):
         if user.role == 'admin':
             return Item_aluguel.objects.all()
         elif user.role == 'padrao':
-            return Item_aluguel.objects.filter(user=user)
+            return Item_aluguel.objects.filter(aluguel__usuario=user)
         return Item_aluguel.objects.none()

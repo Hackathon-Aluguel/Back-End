@@ -17,4 +17,8 @@ class Item (models.Model):
     def __str__(self):
         return f'Item: {self.nome}'
 
+    class Meta:
+        verbose_name = 'Item'
+        verbose_name_plural = 'Itens'
+
     
