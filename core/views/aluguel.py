@@ -10,6 +10,7 @@ from core.permissions.roles import IsAdmin, IsPadrao
 class AluguelViewSet(ModelViewSet):
     queryset = Aluguel.objects.all()
     serializer_class = AluguelSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
@@ -22,6 +23,7 @@ class AluguelViewSet(ModelViewSet):
 class Item_aluguelViewSet(ModelViewSet):
     queryset = Item_aluguel.objects.all()
     serializer_class = Item_aluguelSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user

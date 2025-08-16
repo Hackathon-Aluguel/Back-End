@@ -10,6 +10,10 @@ from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
 from core.views.midia import MidiaViewSet, Midia_itemViewSet
 from core.views.user import UserViewSet
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 router = DefaultRouter()
 router.register(r"avaliacao_item", avaliacao_ItemViewSet)
@@ -26,4 +30,7 @@ urlpatterns = [
     path("", RedirectView.as_view(url="admin/", permanent=False)),
     path("api/", include(router.urls)),
     path("admin/", admin.site.urls),
+    
+    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
