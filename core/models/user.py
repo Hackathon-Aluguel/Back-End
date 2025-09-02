@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('padrao', 'Padrão'),
     )
     email = models.EmailField(max_length=255, unique=True, verbose_name=_('email'), help_text=_('Email'))
-    name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('name'), help_text=_('Username'))
+    username = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('name'), help_text=_('Username'))
     cpf = models.CharField(max_length=11, default=None, null=True, help_text=_('CPF do usuário'))
 
     #midia = models.ForeignKey('core.Midia', on_delete=models.PROTECT, blank=True, null=True)

@@ -8,7 +8,7 @@ from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet
 from core.views.item import ItemViewSet, CategoriaViewSet
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
 from core.views.midia import MidiaViewSet, Midia_itemViewSet
-from core.views.user import UserViewSet
+from core.views.user import UserViewSet, UserCreateView
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -30,6 +30,7 @@ urlpatterns = [
     path("", RedirectView.as_view(url="admin/", permanent=False)),
     path("api/", include(router.urls)),
     path("admin/", admin.site.urls),
+    path('register/', UserCreateView.as_view(), name='register'),
     
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
