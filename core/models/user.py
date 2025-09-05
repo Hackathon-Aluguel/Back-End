@@ -55,6 +55,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=True, verbose_name=_('Usuário está ativo'), help_text=_('Indica que este usuário está ativo.')
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='padrao')
+
+    numero = models.CharField(max_length=10, blank=True, null=True, help_text=('Numero da casa do usuario.'))
+    nome_rua = models.CharField(max_length=10, blank=True, null=True, help_text=('Nome da rua do usuario.'))
+
+    imagem = models.ImageField(upload_to=image_file_path, null=True, blank=True, help_text=('Nome da rua dia usuario.'))
+
     is_staff = models.BooleanField(
         default=False,
         verbose_name=_('Usuário é da equipe'),

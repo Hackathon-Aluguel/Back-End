@@ -1,14 +1,17 @@
 
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework.routers import DefaultRouter
 from django.views.generic import RedirectView
+
+from rest_framework.routers import DefaultRouter
 
 from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet
 from core.views.item import ItemViewSet, CategoriaViewSet
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
 from core.views.midia import MidiaViewSet, Midia_itemViewSet
 from core.views.user import UserViewSet, UserCreateView
+
+from core.views.google_login_success import google_login_success
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -34,4 +37,7 @@ urlpatterns = [
     
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+
+    path('accounts/', include('allauth.urls')),
+    path('auth/google/success/', google_login_success, name='google_login_success'),
 ]
