@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_filters',
 
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'rest_framework',
 
+    'dj_rest_auth',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -55,6 +57,9 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+
+REST_USE_JWT = True
+TOKEN_MODEL = None
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',

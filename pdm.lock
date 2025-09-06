@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:48311b7addd6f9f6729f9e7ef55990fd41fd768e218f73946b486c9f22a5834f"
+content_hash = "sha256:d79cd3bd074ca6679c780c2142b95be914881297ca49a6c42f308ecd3041e64a"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -215,6 +215,37 @@ files = [
 ]
 
 [[package]]
+name = "dj-rest-auth"
+version = "7.0.1"
+requires_python = ">=3.8"
+summary = "Authentication and Registration in Django Rest Framework"
+groups = ["default"]
+marker = "python_version >= \"3.10\""
+dependencies = [
+    "Django<6.0,>=4.2",
+    "djangorestframework>=3.13.0",
+]
+files = [
+    {file = "dj-rest-auth-7.0.1.tar.gz", hash = "sha256:3f8c744cbcf05355ff4bcbef0c8a63645da38e29a0fdef3c3332d4aced52fb90"},
+]
+
+[[package]]
+name = "dj-rest-auth"
+version = "7.0.1"
+extras = ["with_social"]
+requires_python = ">=3.8"
+summary = "Authentication and Registration in Django Rest Framework"
+groups = ["default"]
+marker = "python_version >= \"3.10\""
+dependencies = [
+    "dj-rest-auth==7.0.1",
+    "django-allauth[socialaccount]>=64.0.0",
+]
+files = [
+    {file = "dj-rest-auth-7.0.1.tar.gz", hash = "sha256:3f8c744cbcf05355ff4bcbef0c8a63645da38e29a0fdef3c3332d4aced52fb90"},
+]
+
+[[package]]
 name = "django"
 version = "5.2.6"
 requires_python = ">=3.10"
@@ -241,6 +272,24 @@ marker = "python_version >= \"3.10\""
 dependencies = [
     "Django>=4.2.16",
     "asgiref>=3.8.1",
+]
+files = [
+    {file = "django_allauth-65.11.1.tar.gz", hash = "sha256:e95d5234cccaf92273d315e1393cc4626cb88a19d66a1bf0e81f89f7958cfa06"},
+]
+
+[[package]]
+name = "django-allauth"
+version = "65.11.1"
+extras = ["socialaccount"]
+requires_python = ">=3.8"
+summary = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
+groups = ["default"]
+marker = "python_version >= \"3.10\""
+dependencies = [
+    "django-allauth==65.11.1",
+    "oauthlib<4,>=3.3.0",
+    "pyjwt[crypto]<3,>=2.0",
+    "requests<3,>=2.0.0",
 ]
 files = [
     {file = "django_allauth-65.11.1.tar.gz", hash = "sha256:e95d5234cccaf92273d315e1393cc4626cb88a19d66a1bf0e81f89f7958cfa06"},
@@ -329,6 +378,18 @@ groups = ["default"]
 marker = "python_version >= \"3.10\""
 files = [
     {file = "netifaces-0.11.0.tar.gz", hash = "sha256:043a79146eb2907edf439899f262b3dfe41717d34124298ed281139a8b93ca32"},
+]
+
+[[package]]
+name = "oauthlib"
+version = "3.3.1"
+requires_python = ">=3.8"
+summary = "A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"
+groups = ["default"]
+marker = "python_version >= \"3.10\""
+files = [
+    {file = "oauthlib-3.3.1-py3-none-any.whl", hash = "sha256:88119c938d2b8fb88561af5f6ee0eec8cc8d552b7bb1f712743136eb7523b7a1"},
+    {file = "oauthlib-3.3.1.tar.gz", hash = "sha256:0f0f8aa759826a193cf66c12ea1af1637f87b9b4622d46e866952bb022e538c9"},
 ]
 
 [[package]]
@@ -455,6 +516,23 @@ requires_python = ">=3.9"
 summary = "JSON Web Token implementation in Python"
 groups = ["default"]
 marker = "python_version >= \"3.10\""
+files = [
+    {file = "PyJWT-2.10.1-py3-none-any.whl", hash = "sha256:dcdd193e30abefd5debf142f9adfcdd2b58004e644f25406ffaebd50bd98dacb"},
+    {file = "pyjwt-2.10.1.tar.gz", hash = "sha256:3cc5772eb20009233caf06e9d8a0577824723b44e6648ee0a2aedb6cf9381953"},
+]
+
+[[package]]
+name = "pyjwt"
+version = "2.10.1"
+extras = ["crypto"]
+requires_python = ">=3.9"
+summary = "JSON Web Token implementation in Python"
+groups = ["default"]
+marker = "python_version >= \"3.10\""
+dependencies = [
+    "cryptography>=3.4.0",
+    "pyjwt==2.10.1",
+]
 files = [
     {file = "PyJWT-2.10.1-py3-none-any.whl", hash = "sha256:dcdd193e30abefd5debf142f9adfcdd2b58004e644f25406ffaebd50bd98dacb"},
     {file = "pyjwt-2.10.1.tar.gz", hash = "sha256:3cc5772eb20009233caf06e9d8a0577824723b44e6648ee0a2aedb6cf9381953"},
