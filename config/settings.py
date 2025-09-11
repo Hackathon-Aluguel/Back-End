@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6q&)go%6gy%&ft_p#&$k^!#sw_)y_9smyyzrup2v#yn@a0%($&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -57,6 +57,9 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+SOCIALACCOUNT_AUTO_SIGNUP = True  # cria o usuário automaticamente sem pedir senha
+LOGIN_REDIRECT_URL = '/accounts/google-login-success/'
+LOGOUT_REDIRECT_URL = 'http://localhost:5173/'
 
 REST_USE_JWT = True
 TOKEN_MODEL = None
@@ -66,8 +69,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-LOGIN_REDIRECT_URL = '/auth/google/success/'
-LOGOUT_REDIRECT_URL = '/'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -136,7 +137,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

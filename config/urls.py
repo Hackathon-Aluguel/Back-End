@@ -3,6 +3,8 @@ from django.urls import include, path
 from django.views.generic import RedirectView
 from rest_framework.routers import DefaultRouter
 
+from core.views.current_user import current_user
+
 from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet
 from core.views.item import ItemViewSet, CategoriaViewSet
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
@@ -45,6 +47,8 @@ urlpatterns = [
 
     # Página de sucesso após login Google
     path("auth/google/success/", google_login_success, name="google_login_success"),
+
+    path('users/me/', current_user),
 
     # dj-rest-auth registro
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
