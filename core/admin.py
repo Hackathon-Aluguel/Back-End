@@ -20,49 +20,42 @@ from django.utils.translation import gettext_lazy as _
 
 from core import models
 
+from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from core.models.user import User
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'cpf', 'imagem', 'role')
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'cpf', 'imagem', 'role', 'is_active', 'is_staff', 'is_superuser')
 
 class UserAdmin(BaseUserAdmin):
-    """Define the admin pages for users."""
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = User
 
-    ordering = ['id']
-    list_display = ['email', 'name']
+    list_display = ('id', 'email', 'username', 'cpf', 'role', 'is_staff', 'is_superuser')
+    list_filter = ('role', 'is_staff', 'is_superuser', 'is_active')
+
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal Info'), {'fields': ('name', 'cpf','role',
-                    'imagem',)}),
-        (
-            _('Permissions'),
-            {
-                'fields': (
-                    'is_active',
-                    'is_staff',
-                    'is_superuser',
-                    
-                )
-            },
-        ),
-        (_('Important dates'), {'fields': ('last_login',)}),
-        (_('Groups'), {'fields': ('groups',)}),
-        (_('User Permissions'), {'fields': ('user_permissions',)}),
+        ('Informações pessoais', {'fields': ('username', 'cpf', 'imagem', 'role')}),
+        ('Permissões', {'fields': ('is_staff', 'is_superuser', 'is_active', 'groups', 'user_permissions')}),
     )
-    readonly_fields = ['last_login']
     add_fieldsets = (
-        (
-            None,
-            {
-                'classes': ('wide',),
-                'fields': (
-                    'email',
-                    'password1',
-                    'password2',
-                    'name',
-                    'is_active',
-                    'is_staff',
-                    'is_superuser',
-                ),
-            },
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'username', 'cpf', 'imagem', 'role', 'password1', 'password2', 'is_staff', 'is_superuser')}
         ),
     )
+
+    search_fields = ('email', 'username', 'cpf')
+    ordering = ('email',)
 
 
 admin.site.register(models.User, UserAdmin)
