@@ -30,7 +30,7 @@ class UserCreateView(generics.CreateAPIView):
     serializer_class = UserCreateSerializer
     permission_classes = [AllowAny] 
 
-        def perform_update(self, serializer):
+    def perform_update(self, serializer):
         user = self.get_object()
         if self.request.user != user:
             raise PermissionDenied("Você só pode alterar sua própria foto de perfil.")
