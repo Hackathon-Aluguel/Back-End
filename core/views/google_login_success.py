@@ -10,6 +10,4 @@ def google_login_success(request):
         access_token = str(refresh.access_token)
         refresh_token = str(refresh)
         frontend_url = "http://localhost:5173/social/callback"
-        return redirect(f"{frontend_url}?access={access_token}&refresh={refresh_token}")
-    else:
-        return redirect("http://localhost:5173/login")
+        return redirect(f"{frontend_url}?access={access_token}&refresh={refresh_token}&email={user.email}&avatar={user.socialaccount_set.first().get_avatar_url() if user.socialaccount_set.exists() else ''}")

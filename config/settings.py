@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'dj_rest_auth',
+    'dj_rest_auth.registration',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -57,8 +59,10 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+
 SOCIALACCOUNT_AUTO_SIGNUP = True  # cria o usuário automaticamente sem pedir senha
-LOGIN_REDIRECT_URL = '/accounts/google-login-success/'
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = "/auth/google/success/"
 LOGOUT_REDIRECT_URL = 'http://localhost:5173/'
 
 REST_USE_JWT = True
@@ -108,6 +112,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+    }
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
