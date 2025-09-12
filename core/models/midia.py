@@ -1,13 +1,5 @@
 from django.db import models 
 from core.models.item import Item
-
-'''class Midia (models.Model):
-    nome = models.CharField(max_length=45)
-    chave_midia = models.CharField(max_length=45)
-    
-    def __str__(self):
-        return f'Chave: {self.chave_midia}'''
-
 import mimetypes
 import uuid
 
