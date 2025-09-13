@@ -22,7 +22,7 @@ from core import models
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from core.models.user import User
+from a_users.models import User
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -58,4 +58,4 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
 
 
-admin.site.register(models.User, UserAdmin)
+admin.site.register(User, UserAdmin)

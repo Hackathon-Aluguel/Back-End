@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
+from a_users.views import profile_view
 from rest_framework.routers import DefaultRouter
 
 from core.views.current_user import current_user
@@ -55,4 +58,18 @@ urlpatterns = [
 
     # Login social (Google) via allauth
     path("auth/social/", include("allauth.socialaccount.urls")),
+    
+    #chat
+    
+    path('chat/', include('a_rtchat.urls')),
+    
+    path('profile/', include('a_users.urls')),
+    
+    path('@<username>/', profile_view, name="profile"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [
+        path("__reload__/", include("django_browser_reload.urls")),
+    ]

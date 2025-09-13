@@ -7,6 +7,7 @@ import webbrowser
 import platform
 
 
+
 #ATALHOS
 
 #process = subprocess.Popen(["pdm", "run", "python", "manage.py", "runserver"])
@@ -28,10 +29,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = [ 'https://*' ]
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_filters',
+    'django_cleanup.apps.CleanupConfig',
+    
+    'cloudinary_storage',
+    'cloudinary',
+    
+    'channels',
 
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -56,6 +66,10 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'core',
+    'a_users',
+    'a_rtchat',
+    
+    'django_browser_reload',
 ]
 
 SITE_ID = 1
@@ -92,7 +106,13 @@ MIDDLEWARE = [
 
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+if DEBUG:
+    MIDDLEWARE += ['django_browser_reload.middleware.BrowserReloadMiddleware']
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -111,7 +131,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+#WSGI_APPLICATION = 'config.wsgi.application'
+
+ASGI_APPLICATION = 'config.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    }
+}
+
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -169,9 +198,28 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 STATIC_URL = 'static/'
 
+# STATICFILES_DIRS = [ BASE_DIR / 'static' ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = 'media/'
+
+# if ENVIRONMENT == 'development':
+#     MEDIA_ROOT = BASE_DIR / 'media'
+# else:
+#     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#     CLOUDINARY_STORAGE = {
+#         'CLOUDINARY_URL': env('CLOUDINARY_URL')
+#     }
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'core.User'
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+
+AUTH_USER_MODEL = 'a_users.User'
