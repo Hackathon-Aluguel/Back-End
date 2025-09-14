@@ -40,7 +40,7 @@ class Midia(models.Model):
     
 
 class Midia_item(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.PROTECT)
+    item = models.OneToOneField(Item, on_delete=models.CASCADE, related_name="midia_item")
     midia = models.ManyToManyField(Midia, related_name="Midia", blank=True)
 
     def __str__(self):

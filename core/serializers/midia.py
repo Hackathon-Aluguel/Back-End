@@ -1,16 +1,12 @@
 from rest_framework.serializers import ModelSerializer
-from core.models.midia import Midia, Midia_item
-
+from core.models import Midia, Midia_item
 
 class MidiaSerializer(ModelSerializer):
-    class Meta: 
+    class Meta:
         model = Midia
         fields = '__all__'
 
-
-class Midia_itemSerializer(ModelSerializer):
+class MidiaItemSerializer(ModelSerializer):
     class Meta:
         model = Midia_item
-        fields = '__all__'        
-
-
+        fields = '__all__'

@@ -2,13 +2,15 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 from rest_framework.routers import DefaultRouter
+from django.conf.urls.static import static
+from django.conf import settings
 
 from core.views.current_user import current_user
 
 from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet
 from core.views.item import ItemViewSet, CategoriaViewSet
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
-from core.views.midia import MidiaViewSet, Midia_itemViewSet
+from core.views.midia import MidiaViewSet, MidiaItemViewSet
 from core.views.user import UserViewSet, UserCreateView
 from core.views.google_login_success import google_login_success
 
@@ -22,7 +24,7 @@ router.register(r"categorias", CategoriaViewSet)
 router.register(r"aluguel", AluguelViewSet)
 router.register(r"itens_aluguel", Item_aluguelViewSet)
 router.register(r"midia", MidiaViewSet)
-router.register(r"midia_itens", Midia_itemViewSet)
+router.register(r"midia_itens", MidiaItemViewSet)
 router.register(r"usuarios", UserViewSet)
 
 urlpatterns = [
@@ -55,4 +57,10 @@ urlpatterns = [
 
     # Login social (Google) via allauth
     path("auth/social/", include("allauth.socialaccount.urls")),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
