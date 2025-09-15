@@ -2,10 +2,9 @@ from rest_framework import serializers
 from core.models import Item, Categoria, Midia, Midia_item
 
 class MidiaSerializer(serializers.ModelSerializer):
-    # Se no modelo Midia você definiu uma propriedade url, use ela
     class Meta:
         model = Midia
-        fields = ['id', 'descricao', 'file', 'url']  # ajuste os nomes conforme seus campos
+        fields = ['id', 'descricao', 'file', 'url']
 
 class ItemSerializer(serializers.ModelSerializer):
     fotos = serializers.ListField(
@@ -20,17 +19,14 @@ class ItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'nome', 'descricao', 'preco', 'tempo_limite',
                   'numero', 'nome_rua', 'categoria', 'usuario', 'condicao',
                   'cor', 'quant_estoque', 'midias', 'fotos']
-        read_only_fields = ['usuario']  # 👈 impede o front de sobrescrever
+        read_only_fields = ['usuario']
 
     def create(self, validated_data):
-        request = self.context.get("request")  # pega request no contexto
+        request = self.context.get("request")
         user = request.user if request else None
-
         fotos_data = validated_data.pop('fotos', [])
-        # seta o usuário automaticamente
         item = Item.objects.create(usuario=user, **validated_data)
-
-        midia_item = Midia_item.objects.create(item=item)
+        midia_item, created = Midia_item.objects.get_or_create(item=item)
         for foto in fotos_data:
             midia = Midia.objects.create(file=foto)
             midia_item.midia.add(midia)

@@ -1,12 +1,16 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from core.models import Midia, Midia_item
 
-class MidiaSerializer(ModelSerializer):
+class MidiaSerializer(serializers.ModelSerializer):
+    url = serializers.CharField(source='url', read_only=True)  # usa a property do modelo
+
     class Meta:
         model = Midia
-        fields = '__all__'
+        fields = ['id', 'descricao', 'url']  # só enviamos a URL pública
 
-class MidiaItemSerializer(ModelSerializer):
+class MidiaItemSerializer(serializers.ModelSerializer):
+    midia = MidiaSerializer(many=True, read_only=True)  # garante que o ItemSerializer pegue as imagens
+
     class Meta:
         model = Midia_item
-        fields = '__all__'
+        fields = ['id', 'item', 'midia']

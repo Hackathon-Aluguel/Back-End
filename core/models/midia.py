@@ -36,7 +36,7 @@ class Midia(models.Model):
 
     @property
     def url(self) -> str:
-        return self.file.url  # pylint: disable=no-member
+        return self.file.url
     
 
 class Midia_item(models.Model):
