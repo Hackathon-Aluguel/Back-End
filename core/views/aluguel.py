@@ -6,7 +6,6 @@ from rest_framework.permissions import IsAuthenticated
 
 from core.permissions.roles import IsAdmin, IsPadrao
 
-
 class AluguelViewSet(ModelViewSet):
     queryset = Aluguel.objects.all()
     serializer_class = AluguelSerializer
