@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 from rest_framework.routers import DefaultRouter
+from django.conf import settings
+from django.conf.urls.static import static
 
 from core.views.current_user import current_user
 
@@ -55,4 +57,4 @@ urlpatterns = [
 
     # Login social (Google) via allauth
     path("auth/social/", include("allauth.socialaccount.urls")),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
