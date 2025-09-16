@@ -36,4 +36,3 @@ class UserCreateView(generics.CreateAPIView):
             raise PermissionDenied("Você só pode alterar sua própria foto de perfil.")
         serializer.save()
 
-

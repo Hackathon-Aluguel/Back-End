@@ -1,5 +1,5 @@
 [project]
-name = "Back-End"
+name = "Back-End-1"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
@@ -7,9 +7,10 @@ authors = [
     {name = "renan1811", email = "erickechaves@gmail.com"},
     {name = "erickChavesFiamoncini", email = "erickechaves@gmail.com"},
     {name = "", email = ""},
+    {name = "renan1811", email = "rennlima477@gmail.com"},
 ]
 dependencies = [
-    "django>=5.2.6",
+    "django<6.0,>=4.2",
     "djangorestframework>=3.16.1",
     "python-dotenv>=1.1.1",
     "netifaces>=0.11.0",
@@ -23,7 +24,7 @@ dependencies = [
     "cryptography>=45.0.7",
     "dj-rest-auth[with_social]>=7.0.1",
 ]
-requires-python = "==3.10.*"
+requires-python = ">=3.10,<4.0"
 readme = "README.md"
 license = {text = "MIT"}
 
