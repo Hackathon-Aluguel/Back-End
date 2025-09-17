@@ -1,8 +1,8 @@
 # core/views/item.py
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from core.models import Item, Categoria, Midia, Midia_item
-from core.serializers import ItemSerializer, CategoriaSerializer
+from core.models import Item, Categoria, Midia, Midia_item, Condicao
+from core.serializers import ItemSerializer, CategoriaSerializer, CondicaoSerializer
 from rest_framework.permissions import AllowAny
 
 class ItemViewSet(viewsets.ModelViewSet):
@@ -27,3 +27,7 @@ class ItemViewSet(viewsets.ModelViewSet):
 class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
+
+class CondicaoViewSet(viewsets.ModelViewSet):
+    queryset = Condicao.objects.all()
+    serializer_class = CondicaoSerializer

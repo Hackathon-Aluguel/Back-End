@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Item, Categoria, Midia, Midia_item
+from core.models import Item, Categoria, Midia, Midia_item, Condicao
 
 class MidiaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,6 +34,11 @@ class ItemSerializer(serializers.ModelSerializer):
 
 
 class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = "__all__"
+
+class CondicaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categoria
         fields = "__all__"
