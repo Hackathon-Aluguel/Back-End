@@ -1,13 +1,18 @@
 from rest_framework.viewsets import ModelViewSet
-
+from rest_framework.generics import RetrieveAPIView
 from rest_framework import generics
 from core.serializers.user import UserCreateSerializer
-
+from rest_framework.permissions import AllowAny
 from core.models import User
 from core.serializers.user import userSerializer
 
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 
+class UserDetailView(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = userSerializer
+    permission_classes = [AllowAny]  # permite qualquer usuário acessar
+    lookup_field = 'id'
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = userSerializer

@@ -11,7 +11,7 @@ from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet
 from core.views.item import ItemViewSet, CategoriaViewSet
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
 from core.views.midia import MidiaViewSet, MidiaItemViewSet
-from core.views.user import UserViewSet, UserCreateView
+from core.views.user import UserViewSet, UserCreateView, UserDetailView
 from core.views.google_login_success import google_login_success
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -25,7 +25,7 @@ router.register(r"aluguel", AluguelViewSet)
 router.register(r"itens_aluguel", Item_aluguelViewSet)
 router.register(r"midia", MidiaViewSet)
 router.register(r"midia_itens", MidiaItemViewSet)
-router.register(r"usuarios", UserViewSet)
+router.register(r'usuarios', UserViewSet, basename='usuarios')
 
 urlpatterns = [
     # Redireciona a raiz para admin
@@ -46,6 +46,8 @@ urlpatterns = [
 
     # allauth
     path("accounts/", include("allauth.urls")),
+    path('api/user-publico/<int:id>/', UserDetailView.as_view(), name='user-publico'),
+
 
     # Página de sucesso após login Google
     path("auth/google/success/", google_login_success, name="google_login_success"),

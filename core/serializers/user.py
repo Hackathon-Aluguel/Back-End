@@ -5,11 +5,10 @@ from core.serializers.aluguel import Item_aluguelSerializer
 
 
 class userSerializer(ModelSerializer):
-    itens_alugados = SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'username', 'cpf', 'role', 'imagem', 'itens_alugados']
+        fields = ['id', 'username', 'imagem']
 
     def get_itens_alugados(self, instance):
         itens = Item_aluguel.objects.filter(aluguel__usuario=instance)
