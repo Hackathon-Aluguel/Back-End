@@ -3,6 +3,10 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
+
+
+from django.conf import settings
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -40,6 +44,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
     ROLE_CHOICES = (
         ('admin', 'Administrador'),
         ('padrao', 'Padrão'),
@@ -72,7 +79,26 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+    
+    def __str__(self):
+        return str(self.username)
+    
+    @property
+    def name(self):
+        return self.username or self.email  # se username não existir, retorna email
+
+    @property
+    def avatar(self):
+        if self.imagem:
+            return self.imagem.url
+        return f'{settings.STATIC_URL}images/avatar.svg'
+
 
     class Meta:
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
+        
+        
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)

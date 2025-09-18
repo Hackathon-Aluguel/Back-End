@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import User
+from a_users.models import User
 from core.models.item import Item
 
 class Aluguel(models.Model):
