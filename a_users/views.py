@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from allauth.account.models import EmailAddress
+from .serializers import UserSerializer
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from .forms import *
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
+User = get_user_model()
 
 def profile_view(request, username=None):
     if username:
@@ -17,6 +23,14 @@ def profile_view(request, username=None):
         except:
             return redirect_to_login(request.get_full_path())
     return render(request, 'a_users/profile.html', {'profile':profile})
+
+class UserDetailView(APIView):
+    permission_classes = [AllowAny]   # só se quiser exigir login
+
+    def get(self, request, username):
+        user = get_object_or_404(User, username=username)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 
 @login_required

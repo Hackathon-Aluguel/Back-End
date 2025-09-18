@@ -4,7 +4,6 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 
-from django.contrib.auth.models import User
 
 from django.conf import settings
 
@@ -86,14 +85,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     @property
     def name(self):
-        if self.displayname:
-            return self.displayname
-        return self.user.username 
-    
+        return self.username or self.email  # se username não existir, retorna email
+
     @property
     def avatar(self):
-        if self.image:
-            return self.image.url
+        if self.imagem:
+            return self.imagem.url
         return f'{settings.STATIC_URL}images/avatar.svg'
 
 

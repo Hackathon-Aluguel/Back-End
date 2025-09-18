@@ -1,10 +1,6 @@
 from django.urls import path
-from .views import *
-
+from . import views
 
 urlpatterns = [
-    path('chat/', chat_view, name="home"),
-    path('chat/<username>', get_or_create_chatroom, name="start-chat"),
-    path('chat/room/<chatroom_name>', chat_view, name="chatroom"),
-    path('chat/fileupload/<chatroom_name>', chat_file_upload, name="chat-file-upload"),
+    path("api/chat/<str:group_name>/messages/", views.group_messages, name="group_messages"),
 ]

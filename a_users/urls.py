@@ -1,5 +1,6 @@
 from django.urls import path
 from a_users.views import *
+from .views import UserDetailView
 
 urlpatterns = [
     path('', profile_view, name="profile"),
@@ -10,4 +11,5 @@ urlpatterns = [
     path('usernamechange/', profile_usernamechange, name="profile-usernamechange"),
     path('emailverify/', profile_emailverify, name="profile-emailverify"),
     path('delete/', profile_delete_view, name="profile-delete"),
+    path('<str:username>/', UserDetailView.as_view(), name='profile-detail'),
 ]
