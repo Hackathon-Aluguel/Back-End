@@ -116,7 +116,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {'access_type': 'online'},
+        "AUTH_PARAMS": {"access_type": "online", "prompt": "select_account"},
     }
 }
 
