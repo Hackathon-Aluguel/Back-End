@@ -50,8 +50,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     
-    'channels',
-
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'rest_framework',
@@ -68,7 +66,6 @@ INSTALLED_APPS = [
 
     'core',
     'a_users',
-    'a_rtchat',
     
     'django_browser_reload',
     

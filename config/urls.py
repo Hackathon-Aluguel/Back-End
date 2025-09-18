@@ -14,7 +14,6 @@ from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
 from core.views.user import UserViewSet, UserCreateView 
 from core.views.google_login_success import google_login_success 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from a_rtchat.views import get_or_create_chatroom, chat_view, chat_file_upload
 
 
 from a_users.views import (
@@ -68,7 +67,6 @@ urlpatterns = [ # Redireciona a raiz para admin
                path('users/me/', current_user), # dj-rest-auth registro 
                path("auth/registration/", include("dj_rest_auth.registration.urls")), # Login social (Google) via allauth 
                path("auth/social/", include("allauth.socialaccount.urls")), #chat 
-               path('chat/', include('a_rtchat.urls')), 
                path('profile/', include('a_users.urls')), 
                path('@<username>/', profile_view, name="profile"), 
 
@@ -96,15 +94,6 @@ urlpatterns = [ # Redireciona a raiz para admin
     # allauth
     path("accounts/", include("allauth.urls")),
     path('api/user-publico/<int:id>/', UserDetailView.as_view(), name='user-publico'),
-
-
-    # Chat endpoints REST
-    path("api/chat/<str:username>/", get_or_create_chatroom, name="start-chat"),
-    path("api/chat/room/<str:chatroom_name>/", chat_view, name="chatroom"),
-    path("api/chat/fileupload/<str:chatroom_name>/", chat_file_upload, name="chat-file-upload"),
-    
-
-
 
 
 
