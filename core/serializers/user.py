@@ -5,7 +5,6 @@ from core.serializers.aluguel import Item_aluguelSerializer
 
 
 class userSerializer(ModelSerializer):
-
     class Meta:
         model = User
         fields = ['id', 'username', 'imagem']
