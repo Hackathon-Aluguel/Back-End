@@ -10,7 +10,7 @@ from core.views.current_user import current_user
 from core.views.google_logout import google_logout
 
 from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet
-from core.views.item import ItemViewSet, CategoriaViewSet
+from core.views.item import ItemViewSet, CategoriaViewSet, CondicaoViewSet
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
 from core.views.midia import MidiaViewSet, MidiaItemViewSet
 from core.views.user import UserViewSet, UserCreateView, UserDetailView
@@ -23,6 +23,7 @@ router.register(r"avaliacao_item", avaliacao_ItemViewSet)
 router.register(r"avaliacao_user", avaliacao_UserViewSet)
 router.register(r"itens", ItemViewSet)
 router.register(r"categorias", CategoriaViewSet)
+router.register(r"condicoes", CondicaoViewSet)
 router.register(r"aluguel", AluguelViewSet)
 router.register(r"itens_aluguel", Item_aluguelViewSet)
 router.register(r"midia", MidiaViewSet)
