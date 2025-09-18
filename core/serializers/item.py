@@ -14,10 +14,13 @@ class ItemSerializer(serializers.ModelSerializer):
     )
     midias = MidiaSerializer(source='midia_item.midia', many=True, read_only=True)
 
+    categoria_nome = serializers.CharField(source='categoria.descricao', read_only=True)
+    categoria = serializers.PrimaryKeyRelatedField(queryset=Categoria.objects.all())
+
     class Meta:
         model = Item
         fields = ['id', 'nome', 'descricao', 'preco', 'tempo_limite',
-                  'numero', 'nome_rua', 'categoria', 'usuario', 'condicao',
+                  'numero', 'nome_rua', 'categoria', 'categoria_nome', 'usuario', 'condicao',
                   'cor', 'quant_estoque', 'midias', 'fotos']
         read_only_fields = ['usuario']
 
@@ -40,5 +43,5 @@ class CategoriaSerializer(serializers.ModelSerializer):
 
 class CondicaoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Categoria
+        model = Condicao
         fields = "__all__"
