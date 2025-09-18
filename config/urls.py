@@ -10,7 +10,7 @@ from core.views.current_user import current_user
 from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet 
 from core.views.item import ItemViewSet, CategoriaViewSet 
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet 
-from core.views.midia import MidiaViewSet, Midia_itemViewSet 
+ 
 from core.views.user import UserViewSet, UserCreateView 
 from core.views.google_login_success import google_login_success 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -104,7 +104,7 @@ urlpatterns = [ # Redireciona a raiz para admin
     path("api/chat/fileupload/<str:chatroom_name>/", chat_file_upload, name="chat-file-upload"),
     
 
-]
+
 
 
 
@@ -114,9 +114,11 @@ urlpatterns = [ # Redireciona a raiz para admin
     # dj-rest-auth registro
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
 
+
     # Login social (Google) via allauth
     path("auth/social/", include("allauth.socialaccount.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 from django.conf import settings
 from django.conf.urls.static import static
