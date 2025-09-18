@@ -1,5 +1,5 @@
 [project]
-name = "Back-End"
+name = "Back-End-6"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
@@ -7,6 +7,7 @@ authors = [
     {name = "renan1811", email = "erickechaves@gmail.com"},
     {name = "erickChavesFiamoncini", email = "erickechaves@gmail.com"},
     {name = "", email = ""},
+    {name = "renan1811", email = "rennlima477@gmail.com"},
 ]
 dependencies = [
     "djangorestframework>=3.16.1",

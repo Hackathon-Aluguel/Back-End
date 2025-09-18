@@ -149,7 +149,7 @@ CHANNEL_LAYERS = {
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {'access_type': 'online'},
+        "AUTH_PARAMS": {"access_type": "online", "prompt": "select_account"},
     }
 }
 
@@ -227,3 +227,4 @@ ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 
 AUTH_USER_MODEL = 'a_users.User'
+MEDIA_ROOT = BASE_DIR / 'media'

@@ -32,6 +32,8 @@ class Item (models.Model):
     numero = models.CharField(max_length=10, blank=True, null=True, help_text=('Numero da casa do usuario.'))
     nome_rua = models.CharField(max_length=10, blank=True, null=True, help_text=('Nome da rua do usuario.'))
     condicao = models.ForeignKey (Condicao, on_delete=models.PROTECT, blank=True, null= True)
+    cor = models.CharField(max_length=50, blank=True, null=True)
+    quant_estoque = models.IntegerField(default=0)
 
     def __str__(self):
         return f'Item: {self.nome}'
