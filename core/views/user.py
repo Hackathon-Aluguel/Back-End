@@ -33,11 +33,8 @@ class UserViewSet(ModelViewSet):
 # CADASTRO users 
 class UserCreateView(generics.CreateAPIView):
     serializer_class = UserCreateSerializer
-    permission_classes = [AllowAny] 
+    permission_classes = [AllowAny]
 
-    def perform_update(self, serializer):
-        user = self.get_object()
-        if self.request.user != user:
-            raise PermissionDenied("Você só pode alterar sua própria foto de perfil.")
+    def perform_create(self, serializer):
         serializer.save()
 
