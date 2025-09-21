@@ -171,5 +171,7 @@ cython_debug/
 # Poetry local configuration file - https://python-poetry.org/docs/configuration/#local-configuration
 poetry.toml
 
+# BANCO DE DADOS
+db.sqlite3
 
 # End of https://www.toptal.com/developers/gitignore/api/python
