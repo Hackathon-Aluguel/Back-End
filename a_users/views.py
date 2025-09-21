@@ -126,3 +126,13 @@ def profile_delete_view(request):
         return redirect('home')
     
     return render(request, 'a_users/profile_delete.html')
+
+#Viewset da model User
+from rest_framework.viewsets import ModelViewSet
+from a_users.serializers import UserSerializer
+from a_users.models import User
+
+
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

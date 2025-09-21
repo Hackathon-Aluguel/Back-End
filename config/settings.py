@@ -6,8 +6,7 @@ import time
 import webbrowser
 import platform
 
-
-
+from datetime import timedelta
 #ATALHOS
 
 #process = subprocess.Popen(["pdm", "run", "python", "manage.py", "runserver"])
@@ -72,10 +71,14 @@ INSTALLED_APPS = [
     'views',
 ]
 
+# Google
 SITE_ID = 1
 
 SOCIALACCOUNT_AUTO_SIGNUP = True  # cria o usuário automaticamente sem pedir senha
 SOCIALACCOUNT_LOGIN_ON_GET = True
+
+ACCOUNT_SIGNUP_REDIRECT_URL = "/auth/google/success/"
+ACCOUNT_SIGNUP_VIEW = "/auth/google/success/"
 LOGIN_REDIRECT_URL = "/auth/google/success/"
 LOGOUT_REDIRECT_URL = 'http://localhost:5173/'
 
@@ -87,12 +90,22 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
+
+#Cookies
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://localhost:5173",   # se o front acessa o back
+]
+
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -225,3 +238,10 @@ ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 
 AUTH_USER_MODEL = 'a_users.User'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+#Token Lifetime
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1), # 1 dia de validade para o token de acesso
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7), # 7 dias de validade para o token de refresh
+    # Outras configurações opcionais para simple_jwt
+}
