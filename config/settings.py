@@ -7,6 +7,8 @@ import webbrowser
 import platform
 
 from datetime import timedelta
+
+from decouple import config
 #ATALHOS
 
 #process = subprocess.Popen(["pdm", "run", "python", "manage.py", "runserver"])
@@ -24,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6q&)go%6gy%&ft_p#&$k^!#sw_)y_9smyyzrup2v#yn@a0%($&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -69,6 +71,8 @@ INSTALLED_APPS = [
     'django_browser_reload',
     
     'views',
+
+    'accounts'
 ]
 
 # Google
@@ -154,7 +158,6 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     }
 }
-
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -245,3 +248,14 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7), # 7 dias de validade para o token de refresh
     # Outras configurações opcionais para simple_jwt
 }
+
+# Configurações de e-mail com SendGrid
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = "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"
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "alugae.ifc@gmail.com"
+
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False  # garantir que não está em sandbox
+
+# URL do frontend para os links de redefinição
+FRONTEND_URL = 'http://localhost:5173'

@@ -10,11 +10,12 @@ from core.views.current_user import current_user
 from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet 
 from core.views.item import ItemViewSet, CategoriaViewSet 
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet 
+
+
+from core.views.google_logout import google_logout
  
 from core.views.user import UserViewSet, UserCreateView 
 from core.views.google_login_success import google_login_success 
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
 
 from a_users.views import (
     profile_view,
@@ -23,16 +24,12 @@ from a_users.views import (
     UserDetailView
 )
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
-from django.contrib import admin
-from django.urls import include, path
-from django.views.generic import RedirectView
-from rest_framework.routers import DefaultRouter
-from django.conf.urls.static import static
-from django.conf import settings
-
-from core.views.google_logout import google_logout
-
+ 
 from core.views.avaliacao import avaliacao_ItemViewSet, avaliacao_UserViewSet
 from core.views.item import ItemViewSet, CategoriaViewSet, CondicaoViewSet
 from core.views.aluguel import AluguelViewSet, Item_aluguelViewSet
@@ -41,7 +38,6 @@ from core.views.user import UserViewSet, UserCreateView, UserDetailView
 from core.views.google_login_success import google_login_success
 
 from a_users.views import UserViewSet
-
 
 router = DefaultRouter()
 router.register(r"avaliacao_item", avaliacao_ItemViewSet)
@@ -78,6 +74,7 @@ urlpatterns = [ # Redireciona a raiz para admin
 
     # Rotas da API
     path("api/", include(router.urls)),
+    path('api/', include('accounts.urls')),
 
     # Usuário logado
     path("api/users/me/", current_user, name="current-user"),
@@ -93,18 +90,16 @@ urlpatterns = [ # Redireciona a raiz para admin
     path("api/profile/<str:username>/", UserDetailView.as_view(), name="profile-detail"),
     path("api/profile/<str:username>/edit/", profile_edit_view, name="profile-edit"),
     path("api/profile/settings/", profile_settings_view, name="profile-settings"),
+
     # allauth
     path("accounts/", include("allauth.urls")),
     path('api/user-publico/<int:id>/', UserDetailView.as_view(), name='user-publico'),
-
-
 
     #logout
     path('google-logout/', google_logout, name='google-logout'),
 
     # dj-rest-auth registro
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
-
 
     # Login social (Google) via allauth
     path("auth/social/", include("allauth.socialaccount.urls")),
