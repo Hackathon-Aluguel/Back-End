@@ -251,11 +251,11 @@ SIMPLE_JWT = {
 
 # Configurações de e-mail com SendGrid
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = "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"
+SENDGRID_API_KEY = config("SENDGRID_API_KEY")
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "alugae.ifc@gmail.com"
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False  # garantir que não está em sandbox
 
 # URL do frontend para os links de redefinição
-FRONTEND_URL = 'http://localhost:5173'
+FRONTEND_URL = config('FRONTEND_URL')
