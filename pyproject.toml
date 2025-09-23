@@ -1,5 +1,5 @@
 [project]
-name = "Back-End"
+name = "Back-End-8"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
@@ -36,7 +36,7 @@ dependencies = [
     "daphne>=4.2.1",
     "channels==4.3.0",
 ]
-requires-python = ">=3.9"
+requires-python = "==3.10.*"
 readme = "README.md"
 license = {text = "MIT"}
 

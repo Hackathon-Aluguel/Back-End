@@ -26,7 +26,6 @@ class Item (models.Model):
     nome = models.CharField(max_length=45)
     descricao = models.CharField(max_length=45)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
-    tempo_limite = models.DateField()
     categoria = models.ForeignKey (Categoria, on_delete=models.PROTECT, blank=True, null=True)
     usuario = models.ForeignKey (User, on_delete=models.PROTECT, blank=True, null= True)
     numero = models.CharField(max_length=10, blank=True, null=True, help_text=('Numero da casa do usuario.'))
