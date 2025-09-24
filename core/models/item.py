@@ -29,7 +29,7 @@ class Item (models.Model):
     categoria = models.ForeignKey (Categoria, on_delete=models.PROTECT, blank=True, null=True)
     usuario = models.ForeignKey (User, on_delete=models.PROTECT, blank=True, null= True)
     numero = models.CharField(max_length=10, blank=True, null=True, help_text=('Numero da casa do usuario.'))
-    nome_rua = models.CharField(max_length=10, blank=True, null=True, help_text=('Nome da rua do usuario.'))
+    nome_rua = models.CharField(max_length=200, blank=True, null=True, help_text=('Nome da rua do usuario.'))
     condicao = models.ForeignKey (Condicao, on_delete=models.PROTECT, blank=True, null= True)
     cor = models.CharField(max_length=50, blank=True, null=True)
     quant_estoque = models.IntegerField(default=0)
