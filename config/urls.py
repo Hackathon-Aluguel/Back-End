@@ -42,6 +42,8 @@ from core.views.google_login_success import google_login_success
 
 from a_users.views import UserViewSet
 
+from a_rtchat.views import group_messages, chat_file_upload
+
 
 router = DefaultRouter()
 router.register(r"avaliacao_item", avaliacao_ItemViewSet)
@@ -96,6 +98,10 @@ urlpatterns = [ # Redireciona a raiz para admin
     # allauth
     path("accounts/", include("allauth.urls")),
     path('api/user-publico/<int:id>/', UserDetailView.as_view(), name='user-publico'),
+    
+    
+    path("api/chat/<str:group_name>/messages/", group_messages),
+    path("api/chat/fileupload/<str:chatroom_name>/", chat_file_upload),
 
 
 

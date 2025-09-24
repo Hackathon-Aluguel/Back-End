@@ -1,0 +1,7 @@
+<div class="message">
+  <span class="username">{{ message.author.username }}:</span>
+  <span class="content">{{ message.body }}</span>
+  {% if message.file %}
+    <a href="{{ message.file.url }}" target="_blank">[Arquivo]</a>
+  {% endif %}
+</div>
