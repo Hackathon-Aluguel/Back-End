@@ -28,7 +28,7 @@ def group_messages(request, group_name):
         file = request.FILES.get("file")
         msg = GroupMessage.objects.create(group=group, author=request.user, body=body, file=file)
 
-        # Broadcast via Channels
+       
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
             f"chat_{group_name}",

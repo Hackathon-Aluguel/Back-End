@@ -12,8 +12,7 @@ django_asgi_app = get_asgi_application()
 
 application = ProtocolTypeRouter({
     "http": django_asgi_app,
-    # Para websocket, aplicamos nosso TokenAuthMiddleware antes do URLRouter.
-    # AuthMiddlewareStack ainda pode ser colocado por cima se quiser session auth também.
+    
     "websocket": TokenAuthMiddleware(
         URLRouter(
             a_rtchat.routing.websocket_urlpatterns

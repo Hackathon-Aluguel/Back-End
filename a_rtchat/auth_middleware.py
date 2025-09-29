@@ -10,9 +10,7 @@ jwt_auth = JWTAuthentication()
 
 @database_sync_to_async
 def get_user_from_token(token):
-    """
-    Usa Simple JWT para validar token e retornar User (ou AnonymousUser on fail).
-    """
+    
     if not token:
         return None
     try:
@@ -23,10 +21,7 @@ def get_user_from_token(token):
         return None
 
 class TokenAuthMiddleware(BaseMiddleware):
-    """
-    Extrai token do querystring (?token=...) e configura scope['user'].
-    Uso: TokenAuthMiddleware(inner) -> then AuthMiddlewareStack/timeouts
-    """
+   
     async def __call__(self, scope, receive, send):
         # parse query_string
         query_string = scope.get("query_string", b"").decode()
