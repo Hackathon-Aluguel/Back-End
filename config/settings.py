@@ -259,3 +259,4 @@ SENDGRID_SANDBOX_MODE_IN_DEBUG = False  # garantir que não está em sandbox
 
 # URL do frontend para os links de redefinição
 FRONTEND_URL = config('FRONTEND_URL')
+
