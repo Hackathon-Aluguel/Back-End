@@ -65,8 +65,11 @@ INSTALLED_APPS = [
 
     'core',
     'a_users',
+    'a_rtchat',
     
     'django_browser_reload',
+    
+    'channels',
     
     'views',
 ]

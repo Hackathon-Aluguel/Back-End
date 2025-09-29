@@ -42,6 +42,8 @@ from core.views.google_login_success import google_login_success
 
 from a_users.views import UserViewSet
 
+from a_rtchat.views import group_messages, chat_file_upload
+
 
 router = DefaultRouter()
 router.register(r"avaliacao_item", avaliacao_ItemViewSet)
@@ -54,59 +56,62 @@ router.register(r"itens_aluguel", Item_aluguelViewSet)
 router.register(r"midia", MidiaViewSet)
 router.register(r"midia_itens", MidiaItemViewSet)
 
-#O user que está sendo usado é o da aplicação "a_users"
-#router.register(r'usuarios', UserViewSet, basename='usuarios')
+
 router.register(r'usuarios', UserViewSet, basename='usuarios')
 
-urlpatterns = [ # Redireciona a raiz para admin 
-    path("", RedirectView.as_view(url="admin/", permanent=False)), # Rotas da API 
+urlpatterns = [
+    path("", RedirectView.as_view(url="admin/", permanent=False)),
     path("auth/google/success/", google_login_success, name="google_login_success"), 
     path("admin/", admin.site.urls), # Registro customizado 
-    path("register/", UserCreateView.as_view(), name="register"), # JWT 
+    path("register/", UserCreateView.as_view(), name="register"), 
 
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"), # allauth 
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 
-    path("accounts/", include("allauth.urls")), # Página de sucesso após login Google 
+    path("accounts/", include("allauth.urls")),  
     
-    path('users/me/', current_user), # dj-rest-auth registro 
-    path("auth/registration/", include("dj_rest_auth.registration.urls")), # Login social (Google) via allauth 
+    path('users/me/', current_user),  
+    path("auth/registration/", include("dj_rest_auth.registration.urls")),  
 
-    path("auth/social/", include("allauth.socialaccount.urls")), #chat 
+    path("auth/social/", include("allauth.socialaccount.urls")), 
     path('profile/', include('a_users.urls')), 
     path('@<username>/', profile_view, name="profile"), 
 
-    # Rotas da API
+   
     path("api/", include(router.urls)),
 
-    # Usuário logado
+   
     path("api/users/me/", current_user, name="current-user"),
 
-    # Registro customizado
+    
     path("api/register/", UserCreateView.as_view(), name="register"),
 
-    # JWT
+   
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 
-    # Profile endpoints REST
+   
     path("api/profile/<str:username>/", UserDetailView.as_view(), name="profile-detail"),
     path("api/profile/<str:username>/edit/", profile_edit_view, name="profile-edit"),
     path("api/profile/settings/", profile_settings_view, name="profile-settings"),
-    # allauth
+   
     path("accounts/", include("allauth.urls")),
     path('api/user-publico/<int:id>/', UserDetailView.as_view(), name='user-publico'),
+    
+    
+    path("api/chat/<str:group_name>/messages/", group_messages),
+    path("api/chat/fileupload/<str:chatroom_name>/", chat_file_upload),
 
 
 
-    #logout
+    
     path('google-logout/', google_logout, name='google-logout'),
 
-    # dj-rest-auth registro
+   
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
 
 
-    # Login social (Google) via allauth
+    
     path("auth/social/", include("allauth.socialaccount.urls")),
     
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
