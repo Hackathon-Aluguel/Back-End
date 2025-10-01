@@ -44,7 +44,6 @@ from a_users.views import UserViewSet
 
 from a_rtchat.views import group_messages, chat_file_upload
 
-
 router = DefaultRouter()
 router.register(r"avaliacao_item", avaliacao_ItemViewSet)
 router.register(r"avaliacao_user", avaliacao_UserViewSet)
@@ -55,7 +54,6 @@ router.register(r"aluguel", AluguelViewSet)
 router.register(r"itens_aluguel", Item_aluguelViewSet)
 router.register(r"midia", MidiaViewSet)
 router.register(r"midia_itens", MidiaItemViewSet)
-
 
 router.register(r'usuarios', UserViewSet, basename='usuarios')
 
@@ -77,8 +75,9 @@ urlpatterns = [
     path('profile/', include('a_users.urls')), 
     path('@<username>/', profile_view, name="profile"), 
 
-   
+   #Rotas da API
     path("api/", include(router.urls)),
+    path('api/', include('accounts.urls')),
 
    
     path("api/users/me/", current_user, name="current-user"),
@@ -104,20 +103,14 @@ urlpatterns = [
 
 
 
-    
+    #Google paths
     path('google-logout/', google_logout, name='google-logout'),
 
-   
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
 
-
-    
     path("auth/social/", include("allauth.socialaccount.urls")),
     
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-from django.conf import settings
-from django.conf.urls.static import static
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

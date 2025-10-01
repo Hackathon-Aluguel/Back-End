@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:efe1c2396a75639e0cc5ff0cd7c0554391cd49ddf4f9ba5ff8693b87ac20f70b"
+content_hash = "sha256:c38ca2cea4f5c386c5600910b8f6a16173c2c030dbc75c5e154a224ca4f9624b"
 
 [[metadata.targets]]
 requires_python = "==3.10.*"
@@ -419,6 +419,21 @@ files = [
 ]
 
 [[package]]
+name = "django-sendgrid-v5"
+version = "1.3.0"
+summary = "An implementation of Django's EmailBackend compatible with sendgrid-python v5+"
+groups = ["default"]
+dependencies = [
+    "django>=4.2",
+    "python-http-client>=3.0.0",
+    "sendgrid>=5.0.0",
+]
+files = [
+    {file = "django_sendgrid_v5-1.3.0-py3-none-any.whl", hash = "sha256:72e205dcebf4c6fd034eb2a27dd5a2332486dfd4de9ff33995f01be559f6b6cd"},
+    {file = "django_sendgrid_v5-1.3.0.tar.gz", hash = "sha256:9e81fe4ff7c5ee28182b1298d633a61e37fef5638e9f5c023c93bd1d0832ca4d"},
+]
+
+[[package]]
 name = "djangorestframework"
 version = "3.16.1"
 requires_python = ">=3.9"
@@ -487,6 +502,28 @@ dependencies = [
 files = [
     {file = "incremental-24.7.2-py3-none-any.whl", hash = "sha256:8cb2c3431530bec48ad70513931a760f446ad6c25e8333ca5d95e24b0ed7b8fe"},
     {file = "incremental-24.7.2.tar.gz", hash = "sha256:fb4f1d47ee60efe87d4f6f0ebb5f70b9760db2b2574c59c8e8912be4ebd464c9"},
+]
+
+[[package]]
+name = "markupsafe"
+version = "3.0.3"
+requires_python = ">=3.9"
+summary = "Safely add untrusted strings to HTML/XML markup."
+groups = ["default"]
+marker = "python_version >= \"3.9\""
+files = [
+    {file = "markupsafe-3.0.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:2f981d352f04553a7171b8e44369f2af4055f888dfb147d55e42d29e29e74559"},
+    {file = "markupsafe-3.0.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:e1c1493fb6e50ab01d20a22826e57520f1284df32f2d8601fdd90b6304601419"},
+    {file = "markupsafe-3.0.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:1ba88449deb3de88bd40044603fafffb7bc2b055d626a330323a9ed736661695"},
+    {file = "markupsafe-3.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f42d0984e947b8adf7dd6dde396e720934d12c506ce84eea8476409563607591"},
+    {file = "markupsafe-3.0.3-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:c0c0b3ade1c0b13b936d7970b1d37a57acde9199dc2aecc4c336773e1d86049c"},
+    {file = "markupsafe-3.0.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:0303439a41979d9e74d18ff5e2dd8c43ed6c6001fd40e5bf2e43f7bd9bbc523f"},
+    {file = "markupsafe-3.0.3-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:d2ee202e79d8ed691ceebae8e0486bd9a2cd4794cec4824e1c99b6f5009502f6"},
+    {file = "markupsafe-3.0.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:177b5253b2834fe3678cb4a5f0059808258584c559193998be2601324fdeafb1"},
+    {file = "markupsafe-3.0.3-cp310-cp310-win32.whl", hash = "sha256:2a15a08b17dd94c53a1da0438822d70ebcd13f8c3a95abe3a9ef9f11a94830aa"},
+    {file = "markupsafe-3.0.3-cp310-cp310-win_amd64.whl", hash = "sha256:c4ffb7ebf07cfe8931028e3e4c85f0357459a3f9f9490886198848f4fa002ec8"},
+    {file = "markupsafe-3.0.3-cp310-cp310-win_arm64.whl", hash = "sha256:e2103a929dfa2fcaf9bb4e7c091983a49c9ac3b19c9061b6d5427dd7d14d81a1"},
+    {file = "markupsafe-3.0.3.tar.gz", hash = "sha256:722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698"},
 ]
 
 [[package]]
@@ -637,6 +674,16 @@ files = [
 ]
 
 [[package]]
+name = "python-decouple"
+version = "3.8"
+summary = "Strict separation of settings from code."
+groups = ["default"]
+files = [
+    {file = "python-decouple-3.8.tar.gz", hash = "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f"},
+    {file = "python_decouple-3.8-py3-none-any.whl", hash = "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"},
+]
+
+[[package]]
 name = "python-dotenv"
 version = "1.1.1"
 requires_python = ">=3.9"
@@ -645,6 +692,17 @@ groups = ["default"]
 files = [
     {file = "python_dotenv-1.1.1-py3-none-any.whl", hash = "sha256:31f23644fe2602f88ff55e1f5c79ba497e01224ee7737937930c448e4d0e24dc"},
     {file = "python_dotenv-1.1.1.tar.gz", hash = "sha256:a8a6399716257f45be6a007360200409fce5cda2661e3dec71d23dc15f6189ab"},
+]
+
+[[package]]
+name = "python-http-client"
+version = "3.3.7"
+requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+summary = "HTTP REST client, simplified for Python"
+groups = ["default"]
+files = [
+    {file = "python_http_client-3.3.7-py3-none-any.whl", hash = "sha256:ad371d2bbedc6ea15c26179c6222a78bc9308d272435ddf1d5c84f068f249a36"},
+    {file = "python_http_client-3.3.7.tar.gz", hash = "sha256:bf841ee45262747e00dec7ee9971dfb8c7d83083f5713596488d67739170cea0"},
 ]
 
 [[package]]
@@ -703,6 +761,28 @@ dependencies = [
 files = [
     {file = "requests-oauthlib-2.0.0.tar.gz", hash = "sha256:b3dffaebd884d8cd778494369603a9e7b58d29111bf6b41bdc2dcd87203af4e9"},
     {file = "requests_oauthlib-2.0.0-py2.py3-none-any.whl", hash = "sha256:7dd8a5c40426b779b0868c404bdef9768deccf22749cde15852df527e6269b36"},
+]
+
+[[package]]
+name = "sendgrid"
+version = "6.12.5"
+requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+summary = "Twilio SendGrid library for Python"
+groups = ["default"]
+dependencies = [
+    "cryptography>=45.0.6",
+    "python-http-client>=3.2.1",
+    "werkzeug<1.0.0,>=0.11.15; python_version < \"3.0\"",
+    "werkzeug<2.0.0,>=0.15.0; python_version >= \"3.0\" and python_version < \"3.7\"",
+    "werkzeug<2.3.0,>=0.15.0; python_version >= \"3.0\" and python_version < \"3.8\"",
+    "werkzeug<3.1.0,>=0.16.0; python_version >= \"3.0\" and python_version < \"3.9\"",
+    "werkzeug>=1.0.0; python_version >= \"3.9\"",
+    "werkzeug>=2.2.0; python_version >= \"3.11\"",
+    "werkzeug>=2.3.5; python_version >= \"3.12\"",
+]
+files = [
+    {file = "sendgrid-6.12.5-py3-none-any.whl", hash = "sha256:96f92cc91634bf552fdb766b904bbb53968018da7ae41fdac4d1090dc0311ca8"},
+    {file = "sendgrid-6.12.5.tar.gz", hash = "sha256:ea9aae30cd55c332e266bccd11185159482edfc07c149b6cd15cf08869fabdb7"},
 ]
 
 [[package]]
@@ -868,6 +948,21 @@ summary = "views"
 groups = ["default"]
 files = [
     {file = "views-0.3.tar.gz", hash = "sha256:17f60ecbc213d5aaa8f5359973ab8840071123547e1897cae2f6e762b62dcd68"},
+]
+
+[[package]]
+name = "werkzeug"
+version = "3.1.3"
+requires_python = ">=3.9"
+summary = "The comprehensive WSGI web application library."
+groups = ["default"]
+marker = "python_version >= \"3.9\""
+dependencies = [
+    "MarkupSafe>=2.1.1",
+]
+files = [
+    {file = "werkzeug-3.1.3-py3-none-any.whl", hash = "sha256:54b78bf3716d19a65be4fceccc0d1d7b89e608834989dfae50ea87564639213e"},
+    {file = "werkzeug-3.1.3.tar.gz", hash = "sha256:60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"},
 ]
 
 [[package]]

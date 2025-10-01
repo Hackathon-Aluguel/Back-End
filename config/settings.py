@@ -6,10 +6,11 @@ import time
 import webbrowser
 import platform
 
+#Melhorar a vida do token
 from datetime import timedelta
-#ATALHOS
 
-#process = subprocess.Popen(["pdm", "run", "python", "manage.py", "runserver"])
+# Redefinição de senha
+from decouple import config
 
 time.sleep(2)
 
@@ -70,6 +71,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     
     'channels',
+    'accounts',
     
     'views',
 ]
@@ -248,3 +250,14 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7), # 7 dias de validade para o token de refresh
     # Outras configurações opcionais para simple_jwt
 }
+
+# Configurações de e-mail com SendGrid
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = config("SENDGRID_API_KEY")
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False  # garantir que não está em sandbox
+
+# URL do frontend para os links de redefinição
+FRONTEND_URL = config('FRONTEND_URL')
