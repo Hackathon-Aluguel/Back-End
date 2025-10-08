@@ -172,6 +172,7 @@ cython_debug/
 poetry.toml
 
 # BANCO DE DADOS
+db.sqlite3
 
 
 # End of https://www.toptal.com/developers/gitignore/api/python
