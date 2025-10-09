@@ -4,21 +4,26 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import get_object_or_404
-from .models import ChatGroup, GroupMessage
+from .models import PrivateChat, GroupMessage
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = f"chat_{self.room_name}"
+        self.chat_id = self.scope["url_route"]["kwargs"]["chat_id"]  # aqui será chat_id
+        self.room_group_name = f"chat_{self.chat_id}"
 
         user = self.scope.get("user")
-        
         if not user or isinstance(user, AnonymousUser):
+            # fecha sem informar (poderia retornar 401) — fechamos
             await self.close()
             return
 
-        
+        # verificar se chat existe e usuário participa
+        chat = await self._get_chat_if_participant(self.chat_id, user)
+        if not chat:
+            # fecha a conexão; frontend verá close
+            await self.close()
+            return
+
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
 
@@ -26,7 +31,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def receive(self, text_data=None, bytes_data=None):
-        
         user = self.scope.get("user")
         if not user or isinstance(user, AnonymousUser):
             return
@@ -40,30 +44,45 @@ class ChatConsumer(AsyncWebsocketConsumer):
             return
 
         message = data.get("message", "") or ""
-        
 
-       
-        msg = await self._save_message(user, message)
+        # salva a mensagem
+        msg = await self._save_message(user, self.chat_id, message)
 
-        
+        response = {
+            "id": msg.id,
+            "author": msg.author.username,
+            "message": msg.body,
+            "file": msg.file.url if msg.file else None,
+            "created": msg.created.isoformat(),
+        }
+
+        # envia instantaneamente pro autor (sem esperar broadcast)
+        await self.send(text_data=json.dumps(response))
+
+        # envia para todos os outros conectados ao grupo
         await self.channel_layer.group_send(
             self.room_group_name,
             {
-                "type": "chat_message",  
-                "id": msg.id,
-                "author": msg.author.username,
-                "message": msg.body,
-                "file": msg.file.url if msg.file else None,
-                "created": msg.created.isoformat(),
+                "type": "chat_message",
+                **response
             },
         )
 
+
     async def chat_message(self, event):
-      
         await self.send(text_data=json.dumps(event))
 
     @database_sync_to_async
-    def _save_message(self, user, body):
-       
-        group, _ = ChatGroup.objects.get_or_create(group_name=self.room_name)
-        return GroupMessage.objects.create(group=group, author=user, body=body)
+    def _get_chat_if_participant(self, chat_id, user):
+        try:
+            chat = PrivateChat.objects.get(chat_id=chat_id)
+        except PrivateChat.DoesNotExist:
+            return None
+        if chat.has_participant(user):
+            return chat
+        return None
+
+    @database_sync_to_async
+    def _save_message(self, user, chat_id, body):
+        chat = PrivateChat.objects.get(chat_id=chat_id)
+        return GroupMessage.objects.create(chat=chat, author=user, body=body)

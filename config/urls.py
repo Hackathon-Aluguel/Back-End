@@ -42,7 +42,8 @@ from core.views.google_login_success import google_login_success
 
 from a_users.views import UserViewSet
 
-from a_rtchat.views import group_messages, chat_file_upload
+from a_rtchat import views
+
 
 
 router = DefaultRouter()
@@ -99,8 +100,6 @@ urlpatterns = [
     path('api/user-publico/<int:id>/', UserDetailView.as_view(), name='user-publico'),
     
     
-    path("api/chat/<str:group_name>/messages/", group_messages),
-    path("api/chat/fileupload/<str:chatroom_name>/", chat_file_upload),
 
 
 
@@ -113,6 +112,12 @@ urlpatterns = [
 
     
     path("auth/social/", include("allauth.socialaccount.urls")),
+    
+    path("api/chats/", views.list_my_chats, name="list_my_chats"),  # lista do usuário
+    
+    path("api/chats/create_or_get/", views.create_or_get_private_chat, name="create_or_get_private_chat"),
+    
+    path("api/chats/<str:chat_id>/messages/", views.chat_messages, name="chat_messages"),
     
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
